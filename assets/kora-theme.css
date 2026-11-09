@@ -1,0 +1,55 @@
+/*
+  Kora Threads brand layer.
+  Loaded after Dawn's base.css. Colours and fonts live in theme settings;
+  this file only adds the small brand details the settings can't express.
+*/
+
+:root {
+  /* Five-petal "booti", the small stamp used in hand block printing. */
+  --kora-booti: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='black'%3E%3Ccircle cx='12' cy='12' r='2.4'/%3E%3Cellipse cx='12' cy='5' rx='2.8' ry='3.6'/%3E%3Cellipse cx='12' cy='5' rx='2.8' ry='3.6' transform='rotate(72 12 12)'/%3E%3Cellipse cx='12' cy='5' rx='2.8' ry='3.6' transform='rotate(144 12 12)'/%3E%3Cellipse cx='12' cy='5' rx='2.8' ry='3.6' transform='rotate(216 12 12)'/%3E%3Cellipse cx='12' cy='5' rx='2.8' ry='3.6' transform='rotate(288 12 12)'/%3E%3C/g%3E%3C/svg%3E");
+  /* A border repeat: booti, dot, booti, dot... */
+  --kora-print-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 14'%3E%3Cg fill='black'%3E%3Ccircle cx='7' cy='7' r='1.3'/%3E%3Cellipse cx='7' cy='2.7' rx='1.5' ry='2'/%3E%3Cellipse cx='7' cy='2.7' rx='1.5' ry='2' transform='rotate(72 7 7)'/%3E%3Cellipse cx='7' cy='2.7' rx='1.5' ry='2' transform='rotate(144 7 7)'/%3E%3Cellipse cx='7' cy='2.7' rx='1.5' ry='2' transform='rotate(216 7 7)'/%3E%3Cellipse cx='7' cy='2.7' rx='1.5' ry='2' transform='rotate(288 7 7)'/%3E%3Ccircle cx='21' cy='7' r='1.3'/%3E%3C/g%3E%3C/svg%3E");
+  --kora-whatsapp-green: #1b7a45;
+  --kora-whatsapp-green-hover: #156238;
+}
+
+/* Fraunces reads better a touch tighter than Dawn's default heading spacing. */
+h1,
+h2,
+.h0,
+.h1,
+.h2 {
+  letter-spacing: -0.01em;
+}
+
+.kora-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.kora-eyebrow::before {
+  content: '';
+  flex: none;
+  width: 1.4rem;
+  height: 1.4rem;
+  background-color: currentColor;
+  -webkit-mask: var(--kora-booti) center / contain no-repeat;
+  mask: var(--kora-booti) center / contain no-repeat;
+  opacity: 0.85;
+}
+
+.kora-print-border {
+  display: block;
+  height: 1.4rem;
+  background-color: currentColor;
+  -webkit-mask: var(--kora-print-tile) left center / 2.8rem 1.4rem repeat-x;
+  mask: var(--kora-print-tile) left center / 2.8rem 1.4rem repeat-x;
+  opacity: 0.3;
+}

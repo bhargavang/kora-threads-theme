@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
-    "theme_version": "16.1.1",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_name": "Kora Threads",
+    "theme_version": "1.0.0",
+    "theme_author": "Bhargav Angadi (built on Dawn by Shopify)",
+    "theme_documentation_url": "https://github.com/bhargavang/kora-threads-theme#readme",
+    "theme_support_url": "https://github.com/bhargavang/kora-threads-theme/issues"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -1464,6 +1464,41 @@
         "id": "customer_account_menu",
         "default": "customer-account-main-menu",
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
+      }
+    ]
+  },
+  {
+    "name": "Kora Threads",
+    "settings": [
+      {
+        "type": "header",
+        "content": "WhatsApp ordering"
+      },
+      {
+        "type": "text",
+        "id": "kora_whatsapp_number",
+        "label": "WhatsApp number",
+        "info": "Country code and number, digits only. Example: 919876543210. If you leave it blank, the product page button still opens WhatsApp with the message filled in and the shopper picks who to send it to."
+      },
+      {
+        "type": "textarea",
+        "id": "kora_whatsapp_message",
+        "label": "Pre-filled order message",
+        "default": "Hi Kora Threads! I'd like to order [product] for [price]. Is it available? [url]",
+        "info": "[product] becomes the product and selected size/colour, [price] the current price and [url] the product link."
+      },
+      {
+        "type": "checkbox",
+        "id": "kora_whatsapp_float",
+        "label": "Show floating WhatsApp chat button",
+        "default": true,
+        "info": "Only shows once a WhatsApp number is set."
+      },
+      {
+        "type": "text",
+        "id": "kora_whatsapp_float_message",
+        "label": "Chat button message",
+        "default": "Hi Kora Threads! I have a question."
       }
     ]
   }

@@ -4,20 +4,45 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "brand": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "links": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer"
+          }
+        },
+        "about-demo": {
+          "type": "text",
+          "settings": {
+            "heading": "About this demo",
+            "subtext": "<p>A custom Shopify theme built on Dawn by <a href=\"https://bhargavang.github.io/bhargavang/\" title=\"Bhargav Angadi portfolio\">Bhargav Angadi</a>. Products and prices are placeholders, and no orders are fulfilled.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "brand",
+        "links",
+        "about-demo"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
+        "newsletter_heading": "Get new prints in your inbox",
+        "enable_follow_on_shop": false,
         "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
         "payment_enable": true,
         "show_policy": true,
         "margin_top": 0,
-        "padding_top": 36,
+        "padding_top": 48,
         "padding_bottom": 36
       }
     }
