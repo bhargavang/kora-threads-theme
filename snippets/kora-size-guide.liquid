@@ -1,0 +1,165 @@
+{%- comment -%}
+  Size guide pop-up for the product page.
+
+  The chart is picked from the product's `custom.size_chart` metafield
+  (women-tops, women-bottoms or men-tops). Without the metafield it falls
+  back to the product tags ("men", "bottoms"), then to the block setting.
+  Measurements are stored in inches; the inch/cm switch converts them in
+  the browser (assets/kora-product.js).
+
+  Sizes the product isn't sold in are greyed out, so a style that stops at
+  XL doesn't look like it comes in XXL.
+
+  Accepts:
+  - product: {Object} product
+  - block: {Object} the kora_size_guide block
+{%- endcomment -%}
+{%- liquid
+  assign size_option = product.options_by_name['Size']
+  assign chart_key = product.metafields.custom.size_chart.value
+  if chart_key == blank
+    assign chart_key = block.settings.default_chart
+    if product.tags contains 'men'
+      assign chart_key = 'men-tops'
+    endif
+    if product.tags contains 'bottoms'
+      assign chart_key = 'women-bottoms'
+    endif
+  endif
+
+  case chart_key
+    when 'men-tops'
+      assign chart_title = "Men's shirts and kurtas"
+      assign chart_note = 'Garment measurements. Chest is measured across the body, armpit to armpit, then doubled.'
+      assign chart_columns = 'Size,Chest,Shoulder,Length' | split: ','
+      assign chart_rows = 'S,38,17,28|M,40,17.5,29|L,42,18,30|XL,44,18.5,30.5|XXL,46,19,31' | split: '|'
+    when 'women-bottoms'
+      assign chart_title = "Women's bottoms"
+      assign chart_note = 'Body measurements. Waistbands are elasticated, so the waist stretches about 4 inches.'
+      assign chart_columns = 'Size,Waist,Hip,Length' | split: ','
+      assign chart_rows = 'XS,26,35,38|S,28,37,38|M,30,39,39|L,32,41,39|XL,34,43,40|XXL,36,45,40' | split: '|'
+    else
+      assign chart_title = "Women's kurtas, tops and dresses"
+      assign chart_note = 'Body measurements. Our kurtas have about 2 inches of ease, so pick your body size.'
+      assign chart_columns = 'Size,Bust,Waist,Hip' | split: ','
+      assign chart_rows = 'XS,32,26,35|S,34,28,37|M,36,30,39|L,38,32,41|XL,40,34,43|XXL,42,36,45' | split: '|'
+  endcase
+
+  if size_option != blank
+    assign sold_sizes = size_option.values | join: '|' | prepend: '|' | append: '|'
+  endif
+
+  assign help_message = 'Hi! Can you help me pick a size for the ' | append: product.title | append: '?'
+  assign help_message = help_message | url_encode | replace: '+', '%20'
+  assign help_number = settings.kora_whatsapp_number | remove: '+' | remove: ' ' | remove: '-'
+  assign help_href = 'https://wa.me/' | append: help_number | append: '?text=' | append: help_message
+-%}
+
+{%- if size_option != blank or block.settings.show_without_size_option -%}
+  <kora-size-guide class="kora-size-guide quick-add-hidden" {{ block.shopify_attributes }}>
+    <button
+      type="button"
+      class="kora-size-guide__opener link"
+      aria-haspopup="dialog"
+      aria-controls="KoraSizeGuide-{{ block.id }}"
+    >
+      {%- render 'kora-icon', icon: 'ruler', size: 20 -%}
+      <span>{{ block.settings.label | escape }}</span>
+    </button>
+
+    <dialog
+      id="KoraSizeGuide-{{ block.id }}"
+      class="kora-size-guide__dialog color-{{ block.settings.color_scheme }}"
+      aria-labelledby="KoraSizeGuideTitle-{{ block.id }}"
+    >
+      <div class="kora-size-guide__panel">
+        <div class="kora-size-guide__header">
+          <div>
+            <p class="kora-eyebrow">{{ chart_title }}</p>
+            <h2 id="KoraSizeGuideTitle-{{ block.id }}" class="kora-size-guide__title h2">
+              {{- block.settings.heading | escape -}}
+            </h2>
+          </div>
+          <button
+            type="button"
+            class="kora-size-guide__close"
+            data-kora-close
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </button>
+        </div>
+
+        <div class="kora-size-guide__toolbar">
+          <p class="kora-size-guide__note">{{ chart_note }}</p>
+          <div class="kora-size-guide__units" role="group" aria-label="Measurement unit">
+            <button type="button" data-unit="in" aria-pressed="true">Inches</button>
+            <button type="button" data-unit="cm" aria-pressed="false">cm</button>
+          </div>
+        </div>
+
+        <div class="kora-size-guide__table-wrap">
+          <table class="kora-size-guide__table">
+            <caption class="visually-hidden">{{ chart_title }}, measurements per size</caption>
+            <thead>
+              <tr>
+                {%- for column in chart_columns -%}
+                  <th scope="col">{{ column }}</th>
+                {%- endfor -%}
+              </tr>
+            </thead>
+            <tbody>
+              {%- for row in chart_rows -%}
+                {%- liquid
+                  assign cells = row | split: ','
+                  assign size_name = cells | first
+                  assign size_token = '|' | append: size_name | append: '|'
+                  assign row_class = ''
+                  if sold_sizes != blank
+                    unless sold_sizes contains size_token
+                      assign row_class = 'kora-size-guide__row--unavailable'
+                    endunless
+                  endif
+                -%}
+                <tr class="{{ row_class }}">
+                  {%- for cell in cells -%}
+                    {%- if forloop.first -%}
+                      <th scope="row">
+                        {{ cell }}
+                        {%- if row_class != blank -%}
+                          <span class="kora-size-guide__unavailable">Not in this style</span>
+                        {%- endif -%}
+                      </th>
+                    {%- else -%}
+                      <td data-inches="{{ cell }}">{{ cell }}</td>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+
+        {%- if block.settings.how_to_measure != blank -%}
+          <div class="kora-size-guide__how">
+            <h3 class="h5">How to measure</h3>
+            <div class="rte">{{ block.settings.how_to_measure }}</div>
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.show_whatsapp_help -%}
+          <a
+            class="kora-size-guide__help link"
+            href="{{ help_href }}"
+            target="_blank"
+            rel="noopener"
+            aria-describedby="a11y-new-window-message"
+          >
+            {%- render 'kora-icon', icon: 'whatsapp', size: 20 -%}
+            <span>{{ block.settings.whatsapp_help_label | escape }}</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </dialog>
+  </kora-size-guide>
+{%- endif -%}

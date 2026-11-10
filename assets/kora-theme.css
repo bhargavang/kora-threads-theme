@@ -53,3 +53,37 @@ h2,
   mask: var(--kora-print-tile) left center / 2.8rem 1.4rem repeat-x;
   opacity: 0.3;
 }
+
+/* Floating WhatsApp chat button (snippets/kora-whatsapp-float.liquid). */
+.kora-whatsapp-float {
+  position: fixed;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  background: var(--kora-whatsapp-green);
+  color: #fff;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.22);
+  transition: transform var(--duration-short, 100ms) ease, background-color var(--duration-short, 100ms) ease;
+}
+
+.kora-whatsapp-float:hover {
+  background: var(--kora-whatsapp-green-hover);
+  transform: translateY(-2px);
+}
+
+.kora-whatsapp-float:focus-visible {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .kora-whatsapp-float {
+    right: 2.4rem;
+    bottom: 2.4rem;
+  }
+}

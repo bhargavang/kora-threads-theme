@@ -1,0 +1,59 @@
+{%- comment -%}
+  "Order on WhatsApp" button for the product page.
+
+  Builds a wa.me link with the product, selected size/colour, price and
+  link already typed into the message. When the shopper changes variant,
+  Dawn re-renders this section for the new variant and kora-product.js
+  copies the fresh link across, so the message always matches what's
+  selected.
+
+  If no number is set in Theme settings > Kora Threads, the link opens
+  WhatsApp with the message filled in and the shopper picks the contact.
+
+  Accepts:
+  - product: {Object} product
+  - block: {Object} the kora_whatsapp block
+  - section_id: {String} id of the main-product section
+{%- endcomment -%}
+{%- liquid
+  assign wa_variant = product.selected_or_first_available_variant
+  assign wa_number = settings.kora_whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+  assign wa_template = block.settings.message
+  if wa_template == blank
+    assign wa_template = settings.kora_whatsapp_message
+  endif
+  if wa_template == blank
+    assign wa_template = "Hi! I'd like to order [product] for [price]. [url]"
+  endif
+
+  assign wa_name = product.title
+  unless product.has_only_default_variant
+    assign wa_name = wa_name | append: ' (' | append: wa_variant.title | append: ')'
+  endunless
+  assign wa_price = wa_variant.price | money | strip_html
+  assign wa_url = request.origin | append: wa_variant.url
+
+  assign wa_message = wa_template | replace: '[product]', wa_name | replace: '[price]', wa_price | replace: '[url]', wa_url
+  assign wa_message = wa_message | url_encode | replace: '+', '%20'
+  assign wa_href = 'https://wa.me/' | append: wa_number | append: '?text=' | append: wa_message
+-%}
+<kora-whatsapp-order
+  class="kora-whatsapp quick-add-hidden"
+  data-section="{{ section_id }}"
+  {{ block.shopify_attributes }}
+>
+  <a
+    id="KoraWhatsApp-{{ block.id }}"
+    href="{{ wa_href }}"
+    class="button button--full-width kora-whatsapp__button"
+    target="_blank"
+    rel="noopener"
+    aria-describedby="a11y-new-window-message"
+  >
+    {%- render 'kora-icon', icon: 'whatsapp', size: 22 -%}
+    <span>{{ block.settings.label | escape }}</span>
+  </a>
+  {%- if block.settings.note != blank -%}
+    <p class="kora-whatsapp__note">{{ block.settings.note | escape }}</p>
+  {%- endif -%}
+</kora-whatsapp-order>

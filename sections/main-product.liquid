@@ -15,6 +15,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'component-kora-product.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -41,6 +42,7 @@
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'kora-product.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
@@ -685,6 +687,12 @@
                   </product-recommendations>
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
+                {%- when 'kora_size_guide' -%}
+                  {% render 'kora-size-guide', product: product, block: block %}
+                {%- when 'kora_whatsapp' -%}
+                  {% render 'kora-whatsapp-order', product: product, block: block, section_id: section.id %}
+                {%- when 'kora_fabric_care' -%}
+                  {% render 'kora-fabric-care', product: product, block: block %}
               {%- endcase -%}
             {%- endfor -%}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2139,6 +2147,129 @@
           "default": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.default",
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+        }
+      ]
+    },
+    {
+      "type": "kora_size_guide",
+      "name": "Kora: size guide",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Chart comes from the product's custom.size_chart metafield (women-tops, women-bottoms or men-tops). Without it, products tagged \"men\" use the men's chart and products tagged \"bottoms\" use the bottoms chart."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link label",
+          "default": "Size guide"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Pop-up heading",
+          "default": "Find your size"
+        },
+        {
+          "type": "select",
+          "id": "default_chart",
+          "label": "Default chart",
+          "options": [
+            { "value": "women-tops", "label": "Women's kurtas, tops and dresses" },
+            { "value": "women-bottoms", "label": "Women's bottoms" },
+            { "value": "men-tops", "label": "Men's shirts and kurtas" }
+          ],
+          "default": "women-tops"
+        },
+        {
+          "type": "richtext",
+          "id": "how_to_measure",
+          "label": "How to measure",
+          "default": "<p><strong>Bust or chest:</strong> around the fullest part, tape level under the arms.</p><p><strong>Waist:</strong> around your natural waist, where you bend sideways.</p><p><strong>Hip:</strong> around the fullest part, feet together.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_whatsapp_help",
+          "label": "Show \"Ask us on WhatsApp\" link",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_help_label",
+          "label": "WhatsApp link label",
+          "default": "Between sizes? Send us your measurements on WhatsApp"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_without_size_option",
+          "label": "Show on products without a Size option",
+          "default": false
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "label": "Pop-up colour scheme",
+          "default": "scheme-1"
+        }
+      ]
+    },
+    {
+      "type": "kora_whatsapp",
+      "name": "Kora: order on WhatsApp",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Set the WhatsApp number in Theme settings > Kora Threads."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Button label",
+          "default": "Order on WhatsApp"
+        },
+        {
+          "type": "textarea",
+          "id": "message",
+          "label": "Message",
+          "info": "Leave blank to use the message from theme settings. [product], [price] and [url] are filled in for you."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Small note under the button",
+          "default": "Prefer to chat? We usually reply within a few hours."
+        }
+      ]
+    },
+    {
+      "type": "kora_fabric_care",
+      "name": "Kora: fabric and care",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Reads the product metafields custom.fabric, custom.craft and custom.care. Rows with no value are hidden."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Fabric and care"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "fallback_care",
+          "label": "Fallback care instructions",
+          "info": "Used when a product has no custom.care value. One instruction per line.",
+          "default": "Hand wash or gentle machine wash in cold water\nWash dark colours separately\nDry in shade"
         }
       ]
     }

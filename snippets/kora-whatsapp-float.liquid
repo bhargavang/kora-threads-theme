@@ -1,0 +1,20 @@
+{%- comment -%}
+  Floating "Chat on WhatsApp" button, bottom right on every page.
+  Shows only when a WhatsApp number is set in Theme settings > Kora Threads
+  and the floating button is switched on there.
+{%- endcomment -%}
+{%- liquid
+  assign float_number = settings.kora_whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')'
+  assign float_message = settings.kora_whatsapp_float_message | url_encode | replace: '+', '%20'
+-%}
+{%- if settings.kora_whatsapp_float and float_number != blank -%}
+  <a
+    class="kora-whatsapp-float"
+    href="https://wa.me/{{ float_number }}?text={{ float_message }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat with us on WhatsApp (opens in a new window)"
+  >
+    {%- render 'kora-icon', icon: 'whatsapp', size: 28 -%}
+  </a>
+{%- endif -%}

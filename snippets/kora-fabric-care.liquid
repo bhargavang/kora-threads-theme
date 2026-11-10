@@ -1,0 +1,66 @@
+{%- comment -%}
+  Fabric, craft and care details, read from product metafields:
+  - custom.fabric (single line text), e.g. "100% cotton cambric"
+  - custom.craft (single line text), e.g. "Hand block-printed in Jaipur"
+  - custom.care (multi-line text), one instruction per line
+
+  Rows without a value are skipped. If all three are empty the block
+  shows the fallback care text from its settings, or nothing at all.
+
+  Accepts:
+  - product: {Object} product
+  - block: {Object} the kora_fabric_care block
+{%- endcomment -%}
+{%- liquid
+  assign fabric = product.metafields.custom.fabric.value
+  assign craft = product.metafields.custom.craft.value
+  assign care = product.metafields.custom.care.value
+  if care == blank
+    assign care = block.settings.fallback_care
+  endif
+  assign care_lines = care | newline_to_br | split: '<br />'
+-%}
+{%- if fabric != blank or craft != blank or care != blank -%}
+  <div class="product__accordion accordion kora-fabric-care quick-add-hidden" {{ block.shopify_attributes }}>
+    <details id="Details-{{ block.id }}"{% if block.settings.open_by_default %} open{% endif %}>
+      <summary>
+        <div class="summary__title">
+          {%- render 'kora-icon', icon: 'spool', size: 20 -%}
+          <h2 class="h4 accordion__title">{{ block.settings.heading | escape }}</h2>
+        </div>
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </summary>
+      <div class="accordion__content">
+        <dl class="kora-fabric-care__list">
+          {%- if fabric != blank -%}
+            <div class="kora-fabric-care__row">
+              <dt>{% render 'kora-icon', icon: 'cotton', size: 20 %}Fabric</dt>
+              <dd>{{ fabric | escape }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if craft != blank -%}
+            <div class="kora-fabric-care__row">
+              <dt>{% render 'kora-icon', icon: 'stamp', size: 20 %}Craft</dt>
+              <dd>{{ craft | escape }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if care != blank -%}
+            <div class="kora-fabric-care__row">
+              <dt>{% render 'kora-icon', icon: 'wash', size: 20 %}Care</dt>
+              <dd>
+                <ul class="kora-fabric-care__care list-unstyled" role="list">
+                  {%- for line in care_lines -%}
+                    {%- assign care_line = line | strip -%}
+                    {%- if care_line != blank -%}
+                      <li>{{ care_line | escape }}</li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </dd>
+            </div>
+          {%- endif -%}
+        </dl>
+      </div>
+    </details>
+  </div>
+{%- endif -%}
