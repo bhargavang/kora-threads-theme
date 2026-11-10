@@ -815,7 +815,7 @@ def main():
         ("kora-look.svg", "assets/kora-look.jpg", look_image()),
     ):
         (OUT / svg_name).write_text(doc)
-        manifest.append({"svg": svg_name, "jpg": jpg, "width": w, "height": h})
+        manifest.append({"svg": svg_name, "jpg": jpg, "width": w, "height": h, "scale": 1})
 
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2))
     print(f"Wrote {len(manifest)} SVGs to {OUT}")

@@ -1,0 +1,50 @@
+{%- comment -%}
+  Extra structured data for search engines, on top of what Dawn already
+  outputs (Organization and WebSite in the header, Product on product
+  pages, Article on blog posts).
+
+  Adds a BreadcrumbList on product and collection pages so Google can show
+  "Kora Threads > Women > Neel Block-Print Kurta" instead of a bare URL.
+  Products opened outside a collection use their first collection.
+{%- endcomment -%}
+{%- if request.page_type == 'product' or request.page_type == 'collection' -%}
+  {%- liquid
+    assign crumb_collection = collection
+    if crumb_collection == blank and request.page_type == 'product' and product.collections.size > 0
+      assign crumb_collection = product.collections.first
+    endif
+    assign crumb_position = 1
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ shop.name | json }},
+          "item": {{ request.origin | append: routes.root_url | json }}
+        }
+        {%- if crumb_collection != blank -%}
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ crumb_position }},
+            "name": {{ crumb_collection.title | json }},
+            "item": {{ request.origin | append: crumb_collection.url | json }}
+          }
+        {%- endif -%}
+        {%- if request.page_type == 'product' -%}
+          {%- assign crumb_position = crumb_position | plus: 1 -%}
+          ,{
+            "@type": "ListItem",
+            "position": {{ crumb_position }},
+            "name": {{ product.title | json }},
+            "item": {{ request.origin | append: product.url | json }}
+          }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endif -%}

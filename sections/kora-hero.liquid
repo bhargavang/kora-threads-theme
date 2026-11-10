@@ -87,7 +87,8 @@
             widths: '600, 900, 1200, 1500, 1800',
             sizes: '(min-width: 990px) 55vw, 100vw',
             class: 'kora-hero__image',
-            loading: 'eager'
+            loading: 'eager',
+            fetchpriority: 'high'
         }}
       {%- else -%}
         <img
@@ -97,6 +98,7 @@
           height="1200"
           class="kora-hero__image"
           loading="eager"
+          fetchpriority="high"
         >
       {%- endif -%}
     </div>
