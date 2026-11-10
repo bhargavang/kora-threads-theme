@@ -90,6 +90,16 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* On phones the highlights can wrap, so every item gets its dot. */
+  .kora-hero__highlights li::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
   .kora-hero__buttons {
     width: 100%;
   }

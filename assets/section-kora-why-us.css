@@ -67,8 +67,27 @@
   }
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 749px) {
+  .kora-why__header {
+    margin-bottom: 3.2rem;
+  }
+
   .kora-why__list {
-    grid-template-columns: minmax(0, 1fr);
+    gap: 2.8rem 1.6rem;
+  }
+
+  .kora-why__icon {
+    width: 5.2rem;
+    height: 5.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .kora-why__title {
+    font-size: 1.6rem;
+  }
+
+  .kora-why__text {
+    font-size: 1.3rem;
+    line-height: 1.5;
   }
 }
