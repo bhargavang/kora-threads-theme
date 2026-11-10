@@ -189,12 +189,59 @@
         "padding_top": 72,
         "padding_bottom": 80
       }
+    },
+    "shop_the_look": {
+      "type": "kora-shop-the-look",
+      "blocks": {
+        "look_kurta": {
+          "type": "look_item",
+          "settings": {
+            "product": "neel-block-print-kurta",
+            "position_x": 36,
+            "position_y": 34
+          }
+        },
+        "look_palazzo": {
+          "type": "look_item",
+          "settings": {
+            "product": "handloom-cotton-palazzo",
+            "position_x": 72,
+            "position_y": 60
+          }
+        },
+        "look_dupatta": {
+          "type": "look_item",
+          "settings": {
+            "product": "kalamkari-cotton-dupatta",
+            "position_x": 30,
+            "position_y": 84
+          }
+        }
+      },
+      "block_order": [
+        "look_kurta",
+        "look_palazzo",
+        "look_dupatta"
+      ],
+      "settings": {
+        "eyebrow": "Shop the look",
+        "heading": "Indigo, white and a dash of rust",
+        "text": "<p>Our block-print kurta with wide cotton palazzos and a kalamkari dupatta. Tap the numbers to see each piece.</p>",
+        "image_position": "left",
+        "show_total": true,
+        "button_label": "See all womenswear",
+        "button_link": "shopify://collections/women",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
     "kora_hero",
     "featured_collection",
     "collection_list",
+    "shop_the_look",
     "why_us",
     "brand_story"
   ]
