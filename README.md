@@ -69,7 +69,7 @@ You need a Shopify Partner account and a development store. Both are free to cre
    | Men | Tag is equal to `men` | `men` |
    | Co-ords and sets | Tag is equal to `sets` | `co-ords-and-sets` |
 
-5. **Push the theme** with [Shopify CLI](https://shopify.dev/docs/storefronts/themes/tools/cli):
+5. **Push the theme** with [Shopify CLI](https://shopify.dev/docs/storefronts/themes/tools/cli). Install it once with `npm install -g @shopify/cli@latest`, or put `npx @shopify/cli@latest` in place of `shopify` in the commands below. Replace `your-store` with your development store's address (it's in the admin's web address, or under **Settings → Domains**), and run the push from inside the theme folder:
 
    ```bash
    git clone https://github.com/bhargavang/kora-threads-theme.git
@@ -77,7 +77,7 @@ You need a Shopify Partner account and a development store. Both are free to cre
    shopify theme push --store your-store.myshopify.com --unpublished
    ```
 
-   The CLI asks you to log in the first time. Then go to **Online Store → Themes** and publish *Kora Threads*. To preview while editing, use `shopify theme dev --store your-store.myshopify.com` instead.
+   The CLI opens a browser window for you to log in to Shopify the first time. Then go to **Online Store → Themes** and publish *Kora Threads*. To preview while editing, use `shopify theme dev --store your-store.myshopify.com` instead.
 6. **Set the WhatsApp number** in **Theme settings → Kora Threads** (digits only, with country code, for example `919876543210`). Without a number, the product page button still works: WhatsApp opens with the message filled in and the shopper picks who to send it to.
 7. **Optional extras for a fuller demo:**
    - Filters: add Size, Colour, Price and Product type in the **Search & Discovery** app.
