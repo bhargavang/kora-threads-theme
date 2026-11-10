@@ -1,0 +1,74 @@
+.kora-why__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: 64rem;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.kora-why__heading {
+  margin: 0;
+}
+
+.kora-why__intro {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.kora-why__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3.2rem 2rem;
+  margin: 0;
+}
+
+.kora-why__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+}
+
+.kora-why__icon {
+  display: grid;
+  place-items: center;
+  width: 6.4rem;
+  height: 6.4rem;
+  margin-bottom: 0.8rem;
+  border-radius: 50%;
+  border: 1px dashed rgba(var(--color-foreground), 0.35);
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.kora-why__title {
+  margin: 0;
+}
+
+.kora-why__text {
+  max-width: 28rem;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.kora-why__text > * {
+  margin: 0;
+}
+
+@media screen and (min-width: 990px) {
+  .kora-why__list--3-col {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .kora-why__list--4-col {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .kora-why__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

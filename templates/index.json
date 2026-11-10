@@ -1,21 +1,174 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "kora_hero": {
+      "type": "kora-hero",
+      "settings": {
+        "eyebrow": "Handloom cotton · Hand block-printed",
+        "heading": "Everyday cotton, printed by hand.",
+        "heading_size": "h0",
+        "text": "<p>Kurtas, co-ords and dresses in soft cotton, printed in small batches. Easy to wear, easy to wash, made to last more than one season.</p>",
+        "button_label_1": "Shop new arrivals",
+        "button_link_1": "shopify://collections/new-arrivals",
+        "button_label_2": "Shop all",
+        "button_link_2": "shopify://collections/all",
+        "highlights": "Cash on delivery, 7-day exchange, Ships in 2 days",
+        "image_position": "right",
+        "color_scheme": "scheme-2",
+        "show_print_border": true,
+        "padding_top": 48,
+        "padding_bottom": 64
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New this season",
+        "heading_size": "h1",
+        "description": "<p>Fresh off the printing table. Most styles come in two colours.</p>",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "new-arrivals",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "outline",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": true,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
+    "collection_list": {
+      "type": "collection-list",
       "blocks": {
+        "women": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "women"
+          }
+        },
+        "men": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "men"
+          }
+        },
+        "sets": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "co-ords-and-sets"
+          }
+        }
+      },
+      "block_order": [
+        "women",
+        "men",
+        "sets"
+      ],
+      "settings": {
+        "title": "Shop by category",
+        "heading_size": "h1",
+        "image_ratio": "portrait",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    },
+    "why_us": {
+      "type": "kora-why-us",
+      "blocks": {
+        "reason_cotton": {
+          "type": "reason",
+          "settings": {
+            "icon": "cotton",
+            "title": "Pure cotton",
+            "text": "<p>Cambric, mulmul and khadi that breathe in the heat. No polyester blends.</p>"
+          }
+        },
+        "reason_print": {
+          "type": "reason",
+          "settings": {
+            "icon": "stamp",
+            "title": "Printed by hand",
+            "text": "<p>Every piece is block-printed by hand, so small changes in the print are part of it.</p>"
+          }
+        },
+        "reason_cod": {
+          "type": "reason",
+          "settings": {
+            "icon": "cash",
+            "title": "Cash on delivery",
+            "text": "<p>Pay when it reaches you. UPI and cards work too.</p>"
+          }
+        },
+        "reason_exchange": {
+          "type": "reason",
+          "settings": {
+            "icon": "exchange",
+            "title": "Easy exchanges",
+            "text": "<p>Wrong size? Message us on WhatsApp within 7 days and we'll arrange a pickup.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "reason_cotton",
+        "reason_print",
+        "reason_cod",
+        "reason_exchange"
+      ],
+      "settings": {
+        "eyebrow": "Why Kora Threads",
+        "heading": "Made slowly, sent quickly",
+        "text": "",
+        "columns_desktop": "4",
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "brand_story": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "The name",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "What does kora mean?",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>In Hindi, kora means new and untouched. Kora cotton is cloth straight off the loom, before it is bleached or dyed. Every piece we make starts there, then gets its colour from a carved wooden block and a printer's steady hand.</p>"
           }
         },
         "button": {
-          "type": "buttons",
+          "type": "button",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
+            "button_label": "Browse the full range",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": true,
             "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
@@ -23,53 +176,26 @@
         }
       },
       "block_order": [
+        "caption",
         "heading",
+        "text",
         "button"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "full_width": true,
+        "padding_top": 72,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "kora_hero",
+    "featured_collection",
+    "collection_list",
+    "why_us",
+    "brand_story"
   ]
 }
