@@ -1,0 +1,13 @@
+{
+  "name": "kora-threads-demo-tools",
+  "private": true,
+  "description": "Builds the demo product illustrations and the Shopify product CSV. Not part of the theme.",
+  "type": "module",
+  "scripts": {
+    "images": "python3 build_images.py && node render_images.mjs",
+    "csv": "python3 build_csv.py"
+  },
+  "devDependencies": {
+    "puppeteer-core": "24.43.1"
+  }
+}

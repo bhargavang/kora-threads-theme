@@ -197,8 +197,8 @@
           "type": "look_item",
           "settings": {
             "product": "neel-block-print-kurta",
-            "position_x": 36,
-            "position_y": 34
+            "position_x": 35,
+            "position_y": 30
           }
         },
         "look_palazzo": {
@@ -206,15 +206,15 @@
           "settings": {
             "product": "handloom-cotton-palazzo",
             "position_x": 72,
-            "position_y": 60
+            "position_y": 52
           }
         },
         "look_dupatta": {
           "type": "look_item",
           "settings": {
             "product": "kalamkari-cotton-dupatta",
-            "position_x": 30,
-            "position_y": 84
+            "position_x": 40,
+            "position_y": 86
           }
         }
       },
